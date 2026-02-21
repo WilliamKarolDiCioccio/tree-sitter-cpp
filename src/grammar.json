@@ -7256,10 +7256,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "parameter_pack_expansion"
-        },
-        {
-          "type": "SYMBOL",
           "name": "this"
         },
         {
@@ -9505,6 +9501,10 @@
                     },
                     {
                       "type": "SYMBOL",
+                      "name": "parameter_pack_expansion"
+                    },
+                    {
+                      "type": "SYMBOL",
                       "name": "initializer_list"
                     },
                     {
@@ -9528,6 +9528,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "expression"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "parameter_pack_expansion"
                           },
                           {
                             "type": "SYMBOL",
@@ -9817,6 +9821,10 @@
                     },
                     {
                       "type": "SYMBOL",
+                      "name": "parameter_pack_expansion"
+                    },
+                    {
+                      "type": "SYMBOL",
                       "name": "initializer_list"
                     }
                   ]
@@ -9840,6 +9848,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "expression"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "parameter_pack_expansion"
                           },
                           {
                             "type": "SYMBOL",

@@ -256,10 +256,6 @@
         "named": true
       },
       {
-        "type": "parameter_pack_expansion",
-        "named": true
-      },
-      {
         "type": "parenthesized_expression",
         "named": true
       },
@@ -770,6 +766,10 @@
         },
         {
           "type": "initializer_list",
+          "named": true
+        },
+        {
+          "type": "parameter_pack_expansion",
           "named": true
         },
         {
@@ -4078,6 +4078,10 @@
         {
           "type": "initializer_pair",
           "named": true
+        },
+        {
+          "type": "parameter_pack_expansion",
+          "named": true
         }
       ]
     }
@@ -6811,6 +6815,10 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "parameter_pack_expansion",
           "named": true
         },
         {
