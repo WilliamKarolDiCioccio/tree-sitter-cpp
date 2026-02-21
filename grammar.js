@@ -1023,7 +1023,6 @@ module.exports = grammar(C, {
       $.new_expression,
       $.delete_expression,
       $.lambda_expression,
-      $.parameter_pack_expansion,
       $.this,
       $.user_defined_literal,
       $.fold_expression,
@@ -1372,8 +1371,20 @@ module.exports = grammar(C, {
     // The compound_statement is added to parse macros taking statements as arguments, e.g. MYFORLOOP(1, 10, i, { foo(i); bar(i); })
     argument_list: $ => seq(
       '(',
-      commaSep(choice($.expression, $.initializer_list, $.compound_statement)),
+      commaSep(choice($.expression, $.parameter_pack_expansion, $.initializer_list, $.compound_statement)),
       ')',
+    ),
+
+    initializer_list: $ => seq(
+      '{',
+      commaSep(choice(
+        $.initializer_pair,
+        $.expression,
+        $.parameter_pack_expansion,
+        $.initializer_list,
+      )),
+      optional(','),
+      '}',
     ),
 
     destructor_name: $ => prec(1, seq('~', $.identifier)),

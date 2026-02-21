@@ -1758,3 +1758,63 @@ bool b = typeid(int) == typeid(long);
         right: (typeid_expression
           type: (type_descriptor
             type: (sized_type_specifier)))))))
+
+================================================================================
+Parameter pack expansion scoping regression
+================================================================================
+
+void f() {
+  sizeof(int) + 1;
+  typeid(int) == typeid(long);
+}
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (function_definition
+    type: (primitive_type)
+    declarator: (function_declarator
+      declarator: (identifier)
+      parameters: (parameter_list))
+    body: (compound_statement
+      (expression_statement
+        (binary_expression
+          left: (sizeof_expression
+            type: (type_descriptor
+              type: (primitive_type)))
+          right: (number_literal)))
+      (expression_statement
+        (binary_expression
+          left: (typeid_expression
+            type: (type_descriptor
+              type: (primitive_type)))
+          right: (typeid_expression
+            type: (type_descriptor
+              type: (sized_type_specifier))))))))
+
+================================================================================
+Parameter pack expansion in argument_list and initializer_list
+================================================================================
+
+f(args...);
+int arr[] = {1, args..., 2};
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      arguments: (argument_list
+        (parameter_pack_expansion
+          pattern: (identifier)))))
+  (declaration
+    type: (primitive_type)
+    declarator: (init_declarator
+      declarator: (array_declarator
+        declarator: (identifier))
+      value: (initializer_list
+        (number_literal)
+        (parameter_pack_expansion
+          pattern: (identifier))
+        (number_literal)))))
