@@ -438,7 +438,7 @@ auto f = [](int i) consteval static noexcept -> int { return i + 1; }(5);
                       (identifier)
                       (template_argument_list
                         (type_descriptor
-                          (decltype
+                          (decltype_expression
                             (identifier))))))
                   (argument_list
                     (identifier)))

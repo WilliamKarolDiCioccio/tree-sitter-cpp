@@ -157,7 +157,7 @@ module.exports = grammar(C, {
         $.template_type,
         $._type_identifier,
       ))),
-      choice($.auto, alias($.decltype_auto, $.decltype)),
+      choice($.auto, alias($.decltype_auto, $.decltype_expression)),
     )),
 
     auto: _ => 'auto',
@@ -167,10 +167,10 @@ module.exports = grammar(C, {
       $.auto,
       ')',
     ),
-    decltype: $ => seq(
+    decltype_expression: $ => seq(
       'decltype',
       '(',
-      $.expression,
+      choice($.expression, $.primitive_type, $.sized_type_specifier),
       ')',
     ),
 
@@ -185,7 +185,7 @@ module.exports = grammar(C, {
       $.dependent_type,
       $.splice_type_specifier,
       $.placeholder_type_specifier,
-      $.decltype,
+      $.decltype_expression,
       prec.right(choice(
         alias($.qualified_type_identifier, $.qualified_identifier),
         $._type_identifier,
@@ -1408,7 +1408,7 @@ module.exports = grammar(C, {
       field('scope', optional(choice(
         $._namespace_identifier,
         $.template_type,
-        $.decltype,
+        $.decltype_expression,
         $.splice_expression,
         $.splice_type_specifier,
         alias($.dependent_type_identifier, $.dependent_name),

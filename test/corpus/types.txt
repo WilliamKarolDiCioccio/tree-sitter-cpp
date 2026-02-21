@@ -119,14 +119,14 @@ array<decltype(foo)::type, 5> arr;
 
 (translation_unit
   (declaration
-    (decltype (identifier))
+    (decltype_expression (identifier))
     (identifier))
   (declaration
-    (decltype (identifier))
+    (decltype_expression (identifier))
     (function_declarator (identifier)
       (parameter_list
         (parameter_declaration (primitive_type) (identifier))
-        (parameter_declaration (decltype (identifier)) (identifier)))))
+        (parameter_declaration (decltype_expression (identifier)) (identifier)))))
   (template_declaration
     (template_parameter_list
       (type_parameter_declaration (type_identifier)) (type_parameter_declaration (type_identifier)))
@@ -139,16 +139,33 @@ array<decltype(foo)::type, 5> arr;
           (parameter_declaration (type_identifier) (identifier)))
         (trailing_return_type
           (type_descriptor
-            (decltype (binary_expression (identifier) (identifier))))))))
+            (decltype_expression (binary_expression (identifier) (identifier))))))))
   (declaration
     (template_type
       (type_identifier)
       (template_argument_list
         (type_descriptor
           (qualified_identifier
-            (decltype (identifier))
+            (decltype_expression (identifier))
             (type_identifier)))
         (number_literal)))
+    (identifier)))
+
+====================================================
+Decltype with primitive type
+====================================================
+
+decltype(int) x;
+decltype(bool) y;
+
+---
+
+(translation_unit
+  (declaration
+    (decltype_expression (primitive_type))
+    (identifier))
+  (declaration
+    (decltype_expression (primitive_type))
     (identifier)))
 
 ====================================================

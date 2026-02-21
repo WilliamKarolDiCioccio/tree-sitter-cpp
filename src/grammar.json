@@ -5066,7 +5066,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "decltype"
+          "name": "decltype_expression"
         },
         {
           "type": "PREC_RIGHT",
@@ -11294,7 +11294,7 @@
                   "name": "decltype_auto"
                 },
                 "named": true,
-                "value": "decltype"
+                "value": "decltype_expression"
               }
             ]
           }
@@ -11326,7 +11326,7 @@
         }
       ]
     },
-    "decltype": {
+    "decltype_expression": {
       "type": "SEQ",
       "members": [
         {
@@ -11338,8 +11338,21 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "primitive_type"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "sized_type_specifier"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -17079,7 +17092,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "decltype"
+                      "name": "decltype_expression"
                     },
                     {
                       "type": "SYMBOL",
