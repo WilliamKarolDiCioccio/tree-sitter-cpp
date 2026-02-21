@@ -521,33 +521,33 @@ auto f = [](int i) consteval static noexcept -> int { return i + 1; }(5);
               (identifier))))
         (compound_statement
           (throw_statement
-                (number_literal))))))
-      (declaration
-        (placeholder_type_specifier
-          (auto))
-        (init_declarator
-          (identifier)
-          (call_expression
-            (lambda_expression
-              (lambda_capture_specifier)
-              (lambda_declarator
-                (parameter_list
-                  (parameter_declaration
-                    (primitive_type)
-                    (identifier)))
-                (lambda_specifier)
-                (lambda_specifier)
-                (noexcept)
-                (trailing_return_type
-                  (type_descriptor
-                    (primitive_type))))
-              (compound_statement
-                (return_statement
-                  (binary_expression
-                    (identifier)
-                    (number_literal)))))
-            (argument_list
-              (number_literal))))))
+            (number_literal))))))
+  (declaration
+    (placeholder_type_specifier
+      (auto))
+    (init_declarator
+      (identifier)
+      (call_expression
+        (lambda_expression
+          (lambda_capture_specifier)
+          (lambda_declarator
+            (parameter_list
+              (parameter_declaration
+                (primitive_type)
+                (identifier)))
+            (lambda_specifier)
+            (lambda_specifier)
+            (noexcept)
+            (trailing_return_type
+              (type_descriptor
+                (primitive_type))))
+          (compound_statement
+            (return_statement
+              (binary_expression
+                (identifier)
+                (number_literal)))))
+        (argument_list
+          (number_literal))))))
 
 ================================================================================
 Nested template calls
@@ -1723,3 +1723,38 @@ template <typename... Args> void negateValues(Args... args) {
                     (identifier)))
                 (string_literal
                   (string_content))))))))))
+
+================================================================================
+typeid expressions
+================================================================================
+
+typeid(int);
+typeid(MyClass);
+typeid(*ptr);
+bool b = typeid(int) == typeid(long);
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (expression_statement
+    (typeid_expression
+      type: (type_descriptor
+        type: (primitive_type))))
+  (expression_statement
+    (typeid_expression
+      value: (identifier)))
+  (expression_statement
+    (typeid_expression
+      value: (pointer_expression
+        argument: (identifier))))
+  (declaration
+    type: (primitive_type)
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (binary_expression
+        left: (typeid_expression
+          type: (type_descriptor
+            type: (primitive_type)))
+        right: (typeid_expression
+          type: (type_descriptor
+            type: (sized_type_specifier)))))))

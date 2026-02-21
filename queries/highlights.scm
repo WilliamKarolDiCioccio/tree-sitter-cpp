@@ -70,6 +70,7 @@
  "import"
  "export"
  "module"
+ "typeid"
 ] @keyword
 
 ; Strings

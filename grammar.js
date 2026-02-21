@@ -1029,6 +1029,7 @@ module.exports = grammar(C, {
       $.fold_expression,
       $.reflect_expression,
       $.splice_expression,
+      $.typeid_expression,
     ),
 
     _string: $ => choice(
@@ -1325,6 +1326,16 @@ module.exports = grammar(C, {
         field('value', $.identifier),
         ')',
       ),
+    )),
+
+    typeid_expression: $ => prec(PREC.SIZEOF, seq(
+      'typeid',
+      '(',
+      choice(
+        field('type', $.type_descriptor),
+        field('value', $.expression),
+      ),
+      ')',
     )),
 
     unary_expression: ($, original) => choice(

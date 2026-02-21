@@ -7277,6 +7277,10 @@
         {
           "type": "SYMBOL",
           "name": "splice_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typeid_expression"
         }
       ]
     },
@@ -16939,6 +16943,48 @@
           "value": "..."
         }
       ]
+    },
+    "typeid_expression": {
+      "type": "PREC",
+      "value": 13,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "typeid"
+          },
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "type",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "type_descriptor"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "value",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          }
+        ]
+      }
     },
     "destructor_name": {
       "type": "PREC",
