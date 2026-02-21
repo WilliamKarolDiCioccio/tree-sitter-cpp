@@ -6,14 +6,14 @@ Reference procedure for adding or modifying grammar nodes. Based on commits `cac
 
 ## Files involved
 
-| File | Role | Edit? |
-|---|---|---|
-| `grammar.js` | Source of truth — hand-written grammar rules | YES |
-| `queries/highlights.scm` | Syntax highlighting; add new keywords here | If new keywords |
-| `test/corpus/*.txt` | Corpus tests | YES — always |
-| `src/grammar.json` | Generated intermediate; **never edit directly** | NO |
-| `src/node-types.json` | Generated type metadata; **never edit directly** | NO |
-| `src/parser.c` | Generated C parser; **never edit directly** | NO |
+| File                     | Role                                             | Edit?           |
+| ------------------------ | ------------------------------------------------ | --------------- |
+| `grammar.js`             | Source of truth — hand-written grammar rules     | YES             |
+| `queries/highlights.scm` | Syntax highlighting; add new keywords here       | If new keywords |
+| `test/corpus/*.txt`      | Corpus tests                                     | YES — always    |
+| `src/grammar.json`       | Generated intermediate; **never edit directly**  | NO              |
+| `src/node-types.json`    | Generated type metadata; **never edit directly** | NO              |
+| `src/parser.c`           | Generated C parser; **never edit directly**      | NO              |
 
 ---
 
@@ -83,6 +83,7 @@ mynewkeyword(*ptr);
 ```
 
 Rules for corpus tests:
+
 - Cover the **primary** usage (keyword + type arg, keyword + expr arg, etc.).
 - Cover at least one **edge case** (pointer operand, nested in binary expression, etc.).
 - When fixing a bug, add a **regression test** that would have failed before the fix.
@@ -91,7 +92,7 @@ Rules for corpus tests:
 ### 5. Regenerate the parser
 
 ```bash
-tree-sitter generate src/grammar.json
+tree-sitter generate grammar.js
 ```
 
 This rewrites `src/grammar.json`, `src/node-types.json`, and `src/parser.c`.
@@ -117,7 +118,7 @@ feat: <concise description>          ← grammar.js + queries + test corpus
 chore: generate src/grammar.json, src/node-types.json, src/parser.c
 ```
 
-For bug fixes use `fix:` instead of `feat:`. The fix commit message body should describe *why* the original rule was wrong (see `b86280a` for a good example). Reference the C++ proposal number in the message when relevant (e.g. `P1306`, `P2996`).
+For bug fixes use `fix:` instead of `feat:`. The fix commit message body should describe _why_ the original rule was wrong (see `b86280a` for a good example). Reference the C++ proposal number in the message when relevant (e.g. `P1306`, `P2996`).
 
 ---
 
