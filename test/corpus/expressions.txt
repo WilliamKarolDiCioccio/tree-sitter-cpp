@@ -439,7 +439,8 @@ auto f = [](int i) consteval static noexcept -> int { return i + 1; }(5);
                       (template_argument_list
                         (type_descriptor
                           (decltype_expression
-                            (identifier))))))
+                            (type_descriptor
+                              (type_identifier)))))))
                   (argument_list
                     (identifier)))
                 (parameter_pack_expansion
@@ -1742,7 +1743,8 @@ bool b = typeid(int) == typeid(long);
         type: (primitive_type))))
   (expression_statement
     (typeid_expression
-      value: (identifier)))
+      type: (type_descriptor
+        type: (type_identifier))))
   (expression_statement
     (typeid_expression
       value: (pointer_expression
@@ -1818,3 +1820,99 @@ int arr[] = {1, args..., 2};
         (parameter_pack_expansion
           pattern: (identifier))
         (number_literal)))))
+
+================================================================================
+sizeof with various type forms
+================================================================================
+
+sizeof(int);
+sizeof(MyClass);
+sizeof(std::string);
+sizeof(vector<int>);
+sizeof(a + b);
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (expression_statement
+    (sizeof_expression
+      type: (type_descriptor
+        type: (primitive_type))))
+  (expression_statement
+    (sizeof_expression
+      type: (type_descriptor
+        type: (type_identifier))))
+  (expression_statement
+    (sizeof_expression
+      type: (type_descriptor
+        type: (qualified_identifier
+          scope: (namespace_identifier)
+          name: (type_identifier)))))
+  (expression_statement
+    (sizeof_expression
+      type: (type_descriptor
+        type: (template_type
+          name: (type_identifier)
+          arguments: (template_argument_list
+            (type_descriptor
+              type: (primitive_type)))))))
+  (expression_statement
+    (sizeof_expression
+      value: (parenthesized_expression
+        (binary_expression
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+alignof with various type forms
+================================================================================
+
+alignof(int);
+alignof(MyClass);
+alignof(std::string);
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (expression_statement
+    (alignof_expression
+      type: (type_descriptor
+        type: (primitive_type))))
+  (expression_statement
+    (alignof_expression
+      type: (type_descriptor
+        type: (type_identifier))))
+  (expression_statement
+    (alignof_expression
+      type: (type_descriptor
+        type: (qualified_identifier
+          scope: (namespace_identifier)
+          name: (type_identifier))))))
+
+================================================================================
+decltype expressions
+================================================================================
+
+decltype(A) x;
+decltype(a + b) x;
+decltype(int) y;
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (decltype_expression
+      (type_descriptor
+        (type_identifier)))
+    (identifier))
+  (declaration
+    (decltype_expression
+      (binary_expression
+        (identifier)
+        (identifier)))
+    (identifier))
+  (declaration
+    (decltype_expression
+      (type_descriptor
+        (primitive_type)))
+    (identifier)))

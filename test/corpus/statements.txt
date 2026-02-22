@@ -365,8 +365,8 @@ template<class T> T foo() noexcept(sizeof(T) < 4);
         (noexcept
           (binary_expression
             (sizeof_expression
-              (parenthesized_expression
-                (identifier)))
+              (type_descriptor
+                (type_identifier)))
             (number_literal)))))))
 
 ================================================================================

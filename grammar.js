@@ -170,7 +170,7 @@ module.exports = grammar(C, {
     decltype_expression: $ => seq(
       'decltype',
       '(',
-      choice($.expression, $.primitive_type, $.sized_type_specifier),
+      choice(prec.dynamic(2, $.type_descriptor), prec.dynamic(1, $.expression)),
       ')',
     ),
 
@@ -1317,21 +1317,27 @@ module.exports = grammar(C, {
       '...',
     ),
 
-    sizeof_expression: ($, original) => prec.right(PREC.SIZEOF, choice(
-      original,
-      seq(
+    sizeof_expression: $ => choice(
+      prec.right(PREC.SIZEOF, seq(
         'sizeof', '...',
         '(',
         field('value', $.identifier),
         ')',
-      ),
-    )),
+      )),
+      prec(PREC.SIZEOF, seq(
+        'sizeof',
+        choice(
+          prec.dynamic(1, seq('(', field('type', $.type_descriptor), ')')),
+          field('value', $.expression),
+        ),
+      )),
+    ),
 
     typeid_expression: $ => prec(PREC.SIZEOF, seq(
       'typeid',
       '(',
       choice(
-        field('type', $.type_descriptor),
+        field('type', prec.dynamic(1, $.type_descriptor)),
         field('value', $.expression),
       ),
       ')',
