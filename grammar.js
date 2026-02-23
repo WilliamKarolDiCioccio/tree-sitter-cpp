@@ -360,6 +360,7 @@ module.exports = grammar(C, {
     module_partition: $ => seq(
       ':',
       $.module_name,
+      repeat(seq(':', $.module_name)),
     ),
 
     module_declaration: $ => seq(
@@ -380,7 +381,10 @@ module.exports = grammar(C, {
       optional('export'),
       'import',
       choice(
-        field('name', $.module_name),
+        seq(
+          field('name', $.module_name),
+          optional(field('partition', $.module_partition)),
+        ),
         field('partition', $.module_partition),
         field('header', choice(
           $.string_literal,

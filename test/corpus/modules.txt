@@ -91,6 +91,38 @@ export import :mod;
         (identifier)))))
 
 ================================================================================
+import Declaration with name and partition
+================================================================================
+
+export import Math:Basic;
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (import_declaration
+    name: (module_name
+      (identifier))
+    partition: (module_partition
+      (module_name
+        (identifier)))))
+
+================================================================================
+import Declaration with name and multi-segment partition
+================================================================================
+
+import Math:Analysis:Trigonometry;
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (import_declaration
+    name: (module_name
+      (identifier))
+    partition: (module_partition
+      (module_name
+        (identifier))
+      (module_name
+        (identifier)))))
+
+================================================================================
 import Declaration headerunit with export
 ================================================================================
 
