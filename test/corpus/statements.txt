@@ -351,7 +351,7 @@ template<class T> T foo() noexcept(sizeof(T) < 4);
     (function_declarator
       (identifier)
       (parameter_list)
-      (noexcept
+      (noexcept_expression
         (true))))
   (template_declaration
     (template_parameter_list
@@ -362,7 +362,7 @@ template<class T> T foo() noexcept(sizeof(T) < 4);
       (function_declarator
         (identifier)
         (parameter_list)
-        (noexcept
+        (noexcept_expression
           (binary_expression
             (sizeof_expression
               (type_descriptor

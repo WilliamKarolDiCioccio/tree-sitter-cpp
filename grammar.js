@@ -722,6 +722,7 @@ module.exports = grammar(C, {
 
     _function_exception_specification: $ => choice(
       $.noexcept,
+      $.noexcept_expression,
       $.throw_specifier,
     ),
 
@@ -755,16 +756,7 @@ module.exports = grammar(C, {
 
     trailing_return_type: $ => seq('->', $.type_descriptor),
 
-    noexcept: $ => prec.right(seq(
-      'noexcept',
-      optional(
-        seq(
-          '(',
-          optional($.expression),
-          ')',
-        ),
-      ),
-    )),
+    noexcept: $ => 'noexcept',
 
     throw_specifier: $ => seq(
       'throw',
@@ -1033,6 +1025,7 @@ module.exports = grammar(C, {
       $.reflect_expression,
       $.splice_expression,
       $.typeid_expression,
+      $.noexcept_expression,
     ),
 
     _string: $ => choice(
@@ -1344,6 +1337,12 @@ module.exports = grammar(C, {
         field('type', prec.dynamic(1, $.type_descriptor)),
         field('value', $.expression),
       ),
+      ')',
+    )),
+    noexcept_expression: $ => prec(PREC.SIZEOF, seq(
+      'noexcept',
+      '(',
+      field('value', $.expression),
       ')',
     )),
 

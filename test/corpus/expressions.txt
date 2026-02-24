@@ -1916,3 +1916,73 @@ decltype(int) y;
       (type_descriptor
         (primitive_type)))
     (identifier)))
+
+================================================================================
+noexcept operator - literal
+================================================================================
+bool a = noexcept(true);
+bool b = noexcept(false);
+--------------------------------------------------------------------------------
+(translation_unit
+  (declaration
+    type: (primitive_type)
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (noexcept_expression
+        value: (true))))
+  (declaration
+    type: (primitive_type)
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (noexcept_expression
+        value: (false)))))
+
+================================================================================
+noexcept operator - function call
+================================================================================
+bool a = noexcept(may_throw());
+bool b = noexcept(no_throw());
+--------------------------------------------------------------------------------
+(translation_unit
+  (declaration
+    type: (primitive_type)
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (noexcept_expression
+        value: (call_expression
+          function: (identifier)
+          arguments: (argument_list)))))
+  (declaration
+    type: (primitive_type)
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (noexcept_expression
+        value: (call_expression
+          function: (identifier)
+          arguments: (argument_list))))))
+
+================================================================================
+noexcept operator - nested in noexcept specifier
+================================================================================
+template <typename T>
+void f() noexcept(noexcept(T().operation()));
+--------------------------------------------------------------------------------
+(translation_unit
+  (template_declaration
+    parameters: (template_parameter_list
+      (type_parameter_declaration
+        (type_identifier)))
+    (declaration
+      type: (primitive_type)
+      declarator: (function_declarator
+        declarator: (identifier)
+        parameters: (parameter_list)
+        (noexcept_expression
+          value: (noexcept_expression
+            value: (call_expression
+              function: (field_expression
+                argument: (call_expression
+                  function: (identifier)
+                  arguments: (argument_list))
+                field: (field_identifier))
+              arguments: (argument_list))))))))
