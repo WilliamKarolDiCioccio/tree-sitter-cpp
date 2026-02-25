@@ -1876,6 +1876,24 @@ operator T*();
           (parameter_list))))))
 
 ================================================================================
+Conditional explicit cast operator declaration
+================================================================================
+
+explicit(true) operator int() const;
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (declaration
+    (explicit_specifier
+      value: (true))
+    declarator: (operator_cast
+      type: (primitive_type)
+      declarator: (abstract_function_declarator
+        parameters: (parameter_list)
+        (type_qualifier)))))
+
+================================================================================
 Class scope cast operator overload declarations
 ================================================================================
 

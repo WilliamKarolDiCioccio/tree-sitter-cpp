@@ -290,15 +290,14 @@ module.exports = grammar(C, {
       'virtual',
     ),
 
-    explicit_function_specifier: $ => choice(
+    explicit_function_specifier: $ => 'explicit',
+
+    explicit_specifier: $ => prec(PREC.CALL, seq(
       'explicit',
-      prec(PREC.CALL, seq(
-        'explicit',
-        '(',
-        $.expression,
-        ')',
-      )),
-    ),
+      '(',
+      field('value', $.expression),
+      ')',
+    )),
 
     base_class_clause: $ => seq(
       ':',
@@ -591,6 +590,7 @@ module.exports = grammar(C, {
     _constructor_specifiers: $ => choice(
       $._declaration_modifiers,
       $.explicit_function_specifier,
+      $.explicit_specifier,
     ),
 
     operator_cast_definition: $ => seq(
