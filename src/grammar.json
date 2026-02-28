@@ -14340,6 +14340,23 @@
         }
       ]
     },
+    "for_range_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_declaration_specifiers"
+        },
+        {
+          "type": "FIELD",
+          "name": "declarator",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_declarator"
+          }
+        }
+      ]
+    },
     "_for_range_loop_body": {
       "type": "SEQ",
       "members": [
@@ -14360,15 +14377,11 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "_declaration_specifiers"
-        },
-        {
           "type": "FIELD",
-          "name": "declarator",
+          "name": "variable",
           "content": {
             "type": "SYMBOL",
-            "name": "_declarator"
+            "name": "for_range_declaration"
           }
         },
         {

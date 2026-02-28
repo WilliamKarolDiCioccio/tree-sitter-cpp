@@ -929,10 +929,14 @@ module.exports = grammar(C, {
       ')',
       field('body', $.statement),
     ),
-    _for_range_loop_body: $ => seq(
-      field('initializer', optional($.init_statement)),
+    for_range_declaration: $ => seq(
       $._declaration_specifiers,
       field('declarator', $._declarator),
+    ),
+
+    _for_range_loop_body: $ => seq(
+      field('initializer', optional($.init_statement)),
+      field('variable', $.for_range_declaration),
       ':',
       field('right', choice(
         $.expression,

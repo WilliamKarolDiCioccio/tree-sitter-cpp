@@ -58,9 +58,10 @@ T main() {
       parameters: (parameter_list))
     body: (compound_statement
       (for_range_loop
-        type: (type_identifier)
-        declarator: (reference_declarator
-          (identifier))
+        variable: (for_range_declaration
+          type: (type_identifier)
+          declarator: (reference_declarator
+            (identifier)))
         right: (identifier)
         body: (compound_statement
           (expression_statement
@@ -68,11 +69,12 @@ T main() {
               left: (identifier)
               right: (identifier)))))
       (for_range_loop
-        (type_qualifier)
-        type: (placeholder_type_specifier
-          (auto))
-        declarator: (reference_declarator
-          (identifier))
+        variable: (for_range_declaration
+          (type_qualifier)
+          type: (placeholder_type_specifier
+            (auto))
+          declarator: (reference_declarator
+            (identifier)))
         right: (identifier)
         body: (compound_statement
           (expression_statement
@@ -80,11 +82,12 @@ T main() {
               left: (identifier)
               right: (identifier)))))
       (for_range_loop
-        (type_qualifier)
-        type: (placeholder_type_specifier
-          (auto))
-        declarator: (reference_declarator
-          (identifier))
+        variable: (for_range_declaration
+          (type_qualifier)
+          type: (placeholder_type_specifier
+            (auto))
+          declarator: (reference_declarator
+            (identifier)))
         right: (initializer_list
           (number_literal)
           (number_literal)
@@ -106,9 +109,10 @@ T main() {
                   argument: (identifier)
                   field: (field_identifier))
                 arguments: (argument_list)))))
-        type: (placeholder_type_specifier
-          (auto))
-        declarator: (identifier)
+        variable: (for_range_declaration
+          type: (placeholder_type_specifier
+            (auto))
+          declarator: (identifier))
         right: (identifier)
         body: (compound_statement
           (expression_statement
@@ -129,8 +133,9 @@ T main() {
               type: (qualified_identifier
                 scope: (namespace_identifier)
                 name: (type_identifier)))))
-        type: (type_identifier)
-        declarator: (identifier)
+        variable: (for_range_declaration
+          type: (type_identifier)
+          declarator: (identifier))
         right: (identifier)
         body: (compound_statement
           (expression_statement
@@ -148,8 +153,9 @@ T main() {
           (declaration
             type: (primitive_type)
             declarator: (identifier)))
-        type: (primitive_type)
-        declarator: (identifier)
+        variable: (for_range_declaration
+          type: (primitive_type)
+          declarator: (identifier))
         right: (initializer_list
           (number_literal))
         body: (compound_statement)))))
@@ -500,9 +506,10 @@ void f() {
           (attribute
             (identifier)))
         (for_range_loop
-          (placeholder_type_specifier
-            (auto))
-          (identifier)
+          variable: (for_range_declaration
+            (placeholder_type_specifier
+              (auto))
+            declarator: (identifier))
           (identifier)
           (compound_statement)))
       (attributed_statement
